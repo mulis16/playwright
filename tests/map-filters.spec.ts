@@ -1,15 +1,15 @@
-// Because of custom fixtures we need to import test and expect from there
-// NOT from @playwright/test
-import { test, expect } from "../fixtures/fixtures";
+import { test, expect } from "@playwright/test";
+import { MapPage } from "../pages/map.page";
 
-test.use({ storageState: "e2e/auth/user.json" });
-
+let mapPage: MapPage;
 test.describe("Map - Filters", () => {
-  test.beforeEach(async ({ mapPage }) => {
+  test.beforeEach(async ({ page }) => {
+    mapPage = new MapPage(page);
+
     await mapPage.goto();
   });
 
-  test("show more/show less button functionality", async ({ mapPage }) => {
+  test("show more/show less button functionality", async () => {
     mapPage.assertDrawerClosed();
 
     await mapPage.filtersNavigationItemButton.click();
@@ -39,9 +39,7 @@ test.describe("Map - Filters", () => {
     await expect(mapPage.soilEvaluationOption).not.toBeVisible();
   });
 
-  test("verify Add filter elements are present in dropdown", async ({
-    mapPage,
-  }) => {
+  test("verify Add filter elements are present in dropdown", async () => {
     mapPage.assertDrawerClosed();
 
     await mapPage.filtersNavigationItemButton.click();
@@ -56,20 +54,18 @@ test.describe("Map - Filters", () => {
 });
 
 test.describe("Map - Display options", () => {
-  test.beforeEach(async ({ mapPage }) => {
+  test.beforeEach(async ({ page }) => {
+    mapPage = new MapPage(page);
+
     await mapPage.goto();
   });
 
-  test("switching between RGB and NDVI shows/hides the scale", async ({
-    mapPage,
-  }) => {
+  test("switching between RGB and NDVI shows/hides the scale", async () => {
     mapPage.assertDrawerClosed();
     await mapPage.displayOptionsNavigationItemButton.click();
   });
 
-  test("assert that counter shows 2 when “NDVI drone” and “Weather stations” selected", async ({
-    mapPage,
-  }) => {
+  test("assert that counter shows 2 when “NDVI drone” and “Weather stations” selected", async () => {
     mapPage.assertDrawerClosed();
     await mapPage.displayOptionsNavigationItemButton.click();
   });

@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "./e2e/tests",
+  testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -18,16 +18,16 @@ export default defineConfig({
   projects: [
     {
       name: "setup",
-      testMatch: /auth\.setup\.ts/,
+      testMatch: /global\.setup\.ts/,
       use: {
-        headless: false, // Run setup in headed mode to see the browser
+        headless: false,
       },
     },
     {
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        storageState: "e2e/auth/user.json",
+        storageState: ".tmp/user.json",
         headless: false,
       },
       dependencies: ["setup"],

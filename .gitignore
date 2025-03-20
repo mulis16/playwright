@@ -1,7 +1,4 @@
-playwright-report/
-test-results/
 **/test-results/
 **/playwright-report/
-e2e/auth/
-e2e/.DS_Store
 node_modules/
+/.tmp/user.json
