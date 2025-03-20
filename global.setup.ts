@@ -1,6 +1,6 @@
 import { test as setup } from "@playwright/test";
-import { loginWithKeycloak } from "../utils/auth-utils";
-import { keycloakConfig } from "../utils/auth.config";
+import { loginWithKeycloak } from "./utils/auth-utils";
+import { keycloakConfig } from "./utils/auth.config";
 import fs from "fs";
 import path from "path";
 
@@ -17,9 +17,10 @@ const ensureTmpFolderExists = () => {
   }
 };
 
+console.log("Running global setup...");
 ensureTmpFolderExists();
 
-setup("authenticate", async ({ page }) => {
+setup("Authenticate", async ({ page }) => {
   const authFile = path.join(process.cwd(), ".tmp", "user.json");
   fs.mkdirSync(path.dirname(authFile), { recursive: true });
 
