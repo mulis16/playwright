@@ -5,7 +5,6 @@ let mapPage: MapPage;
 test.describe("Map - Filters", () => {
   test.beforeEach(async ({ page }) => {
     mapPage = new MapPage(page);
-
     await mapPage.goto();
   });
 
@@ -19,23 +18,22 @@ test.describe("Map - Filters", () => {
     await mapPage.assertDefaultOperationsOptions();
     await mapPage.assertDefaultMonitoringOptions();
 
-    // TODO: Refactor this if possible
-    await mapPage.showMoreButton.first().click();
+    await mapPage.cropsShowMoreButton.click();
     await expect(mapPage.speltCropOption).toBeVisible();
 
-    await mapPage.showLessButton.first().click();
+    await mapPage.showLessButton.click();
     await expect(mapPage.speltCropOption).not.toBeVisible();
 
-    await mapPage.showMoreButton.nth(1).click();
+    await mapPage.operationsShowMoreButton.click();
     await expect(mapPage.harvestOption).toBeVisible();
 
-    await mapPage.showLessButton.first().click();
+    await mapPage.showLessButton.click();
     await expect(mapPage.harvestOption).not.toBeVisible();
 
-    await mapPage.showMoreButton.nth(2).click();
+    await mapPage.monitoringShowMoreButton.click();
     await expect(mapPage.soilEvaluationOption).toBeVisible();
 
-    await mapPage.showLessButton.first().click();
+    await mapPage.showLessButton.click();
     await expect(mapPage.soilEvaluationOption).not.toBeVisible();
   });
 
@@ -44,29 +42,39 @@ test.describe("Map - Filters", () => {
 
     await mapPage.filtersNavigationItemButton.click();
     await mapPage.addFilterButton.click();
-    // TODO: add this to page an call asserts in function
-    await expect(mapPage.addFilterDropdown).toContainText("Soil");
-    // is this a typo in the app? on text Rating it fails
-    await expect(mapPage.addFilterDropdown).toContainText("rating");
-    await expect(mapPage.addFilterDropdown).toContainText("Contamination");
-    await expect(mapPage.addFilterDropdown).toContainText("Weed");
+    await mapPage.assertAddFilterDropdownElements();
   });
 });
 
 test.describe("Map - Display options", () => {
   test.beforeEach(async ({ page }) => {
     mapPage = new MapPage(page);
-
     await mapPage.goto();
   });
 
   test("switching between RGB and NDVI shows/hides the scale", async () => {
     mapPage.assertDrawerClosed();
     await mapPage.displayOptionsNavigationItemButton.click();
+    await mapPage.assertDisplayOptionsDrawerOpened();
+
+    await mapPage.ndviDroneOption.click();
+    await expect(mapPage.ndviDroneOption).toBeChecked();
+    await expect(mapPage.scaleContainer).toBeVisible();
+
+    await mapPage.rgbDroneOption.click();
+    await expect(mapPage.rgbDroneOption).toBeChecked();
+    await expect(mapPage.scaleContainer).not.toBeVisible();
   });
 
   test("assert that counter shows 2 when “NDVI drone” and “Weather stations” selected", async () => {
     mapPage.assertDrawerClosed();
     await mapPage.displayOptionsNavigationItemButton.click();
+    await mapPage.assertDisplayOptionsDrawerOpened();
+
+    await mapPage.ndviDroneOption.click();
+    await expect(mapPage.displayOptionsCounter).toHaveText("1");
+
+    await mapPage.weatherStationsOption.click();
+    await expect(mapPage.displayOptionsCounter).toHaveText("2");
   });
 });

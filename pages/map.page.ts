@@ -15,8 +15,10 @@ export class MapPage extends BasePage {
   private readonly filtersHeading = this.page.locator(".header-container", {
     hasText: "Filters",
   });
-  public readonly showMoreButton = this.getByText("Show more");
-  public readonly showLessButton = this.getByText("Show less");
+  public readonly cropsShowMoreButton = this.getByText("Show more").first();
+  public readonly operationsShowMoreButton = this.getByText("Show more").nth(1);
+  public readonly monitoringShowMoreButton = this.getByText("Show more").nth(2);
+  public readonly showLessButton = this.getByText("Show less").first();
 
   // Crops
   private readonly cropsHeading = this.getHeadingByText("Crops");
@@ -58,6 +60,25 @@ export class MapPage extends BasePage {
 
   public readonly addFilterButton = this.getByText("Add filter");
   public readonly addFilterDropdown = this.page.getByRole("menu");
+
+  private readonly displayOptionsHeading = this.page.locator(
+    ".header-container",
+    {
+      hasText: "Display options",
+    }
+  );
+  // Land images
+  private readonly landImagesHeading = this.getHeadingByText("Land images");
+  public readonly rgbDroneOption = this.getByText("RGB drone");
+  public readonly ndviDroneOption = this.getByText("NDVI drone");
+  private readonly elevation = this.getByText("Elevation");
+  public readonly scaleContainer = this.page.locator(".scale-container");
+  // Weather conditions
+  private readonly weatherConditionsHeading =
+    this.getHeadingByText("Weather conditions");
+  public readonly weatherStationsOption =
+    this.getByText("Weather stations").nth(1);
+  public readonly displayOptionsCounter = this.page.locator(".link__number");
   constructor(page: Page) {
     super(page);
   }
@@ -103,5 +124,23 @@ export class MapPage extends BasePage {
     await expect(this.cropEvaluationOption).toBeVisible();
     await expect(this.weedsPestsDiseasesOption).toBeVisible();
     await expect(this.soilEvaluationTillageOption).toBeVisible();
+  }
+
+  async assertAddFilterDropdownElements() {
+    await expect(this.addFilterDropdown).toBeVisible();
+    await expect(this.addFilterDropdown).toContainText("Soil");
+    await expect(this.addFilterDropdown).toContainText("rating");
+    await expect(this.addFilterDropdown).toContainText("Contamination");
+    await expect(this.addFilterDropdown).toContainText("Weed");
+  }
+
+  async assertDisplayOptionsDrawerOpened() {
+    await expect(this.menuSidebar).toHaveClass(this.drawerOpened);
+    await expect(this.menuSidebar).not.toHaveClass(this.drawerClosed);
+    await expect(this.displayOptionsHeading).toBeVisible();
+    // await expect(this.landImagesHeading).toBeVisible();
+    await expect(this.rgbDroneOption).toBeVisible();
+    await expect(this.ndviDroneOption).toBeVisible();
+    await expect(this.elevation).toBeVisible();
   }
 }
