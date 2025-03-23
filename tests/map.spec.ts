@@ -7,12 +7,12 @@ test.describe("Map - Filters", () => {
   test.beforeEach(async ({ page }) => {
     const mapPage = new MapPage(page);
     await mapPage.goto();
+    mapPage.assertDrawerClosed();
   });
 
   test("show more/show less button functionality", async ({ page }) => {
     const mapPage = new MapPage(page);
     const mainSidebarPage = new MainSidebarPage(page);
-    mapPage.assertDrawerClosed();
 
     await mainSidebarPage.filtersNavigationItemButton.click();
     await mapPage.assertFiltersDrawerOpened();
@@ -45,7 +45,6 @@ test.describe("Map - Filters", () => {
   }) => {
     const mapPage = new MapPage(page);
     const mainSidebarPage = new MainSidebarPage(page);
-    mapPage.assertDrawerClosed();
 
     await mainSidebarPage.filtersNavigationItemButton.click();
     await mapPage.addFilterButton.click();
@@ -57,6 +56,7 @@ test.describe("Map - Display options", () => {
   test.beforeEach(async ({ page }) => {
     const mapPage = new MapPage(page);
     await mapPage.goto();
+    mapPage.assertDrawerClosed();
   });
 
   test("switching between RGB and NDVI shows/hides the scale", async ({
@@ -64,7 +64,6 @@ test.describe("Map - Display options", () => {
   }) => {
     const mapPage = new MapPage(page);
     const mainSidebarPage = new MainSidebarPage(page);
-    mapPage.assertDrawerClosed();
     await mainSidebarPage.displayOptionsNavigationItemButton.click();
     await mapPage.assertDisplayOptionsDrawerOpened();
 
@@ -82,7 +81,6 @@ test.describe("Map - Display options", () => {
   }) => {
     const mapPage = new MapPage(page);
     const mainSidebarPage = new MainSidebarPage(page);
-    mapPage.assertDrawerClosed();
     await mainSidebarPage.displayOptionsNavigationItemButton.click();
     await mapPage.assertDisplayOptionsDrawerOpened();
 
