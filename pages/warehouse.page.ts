@@ -41,7 +41,7 @@ export class WarehousePage extends BasePage {
     { hasText: "Mark as Cancelled" }
   );
 
-  // side panel locators
+  // side panel locators - create receive from harvest order
   private readonly sidePanelRootElement = this.page.locator(
     "div[test-action-side-panel]"
   );

@@ -9,9 +9,6 @@ export class MapPage extends BasePage {
   private readonly filtersHeading = this.page.locator(".header-container", {
     hasText: "Filters",
   });
-  public readonly cropsShowMoreButton = this.getByText("Show more").first();
-  public readonly operationsShowMoreButton = this.getByText("Show more").nth(1);
-  public readonly monitoringShowMoreButton = this.getByText("Show more").nth(2);
   public readonly showLessButton = this.getByText("Show less").first();
 
   // Crops
@@ -22,6 +19,7 @@ export class MapPage extends BasePage {
   private readonly barrenCropOption = this.getByText("Barren");
   private readonly flaxCropOption = this.getByText("Flax");
   public readonly speltCropOption = this.getByText("Spelt");
+  public readonly cropsShowMoreButton = this.getByText("Show more").first();
   // Operations
   private readonly operationsHeading = this.getHeadingByText("Operations");
   private readonly plantMaterialSamplingOption = this.getByText(
@@ -34,6 +32,7 @@ export class MapPage extends BasePage {
   private readonly sowingOption = this.getByText("Sowing");
   private readonly mechanicalOption = this.getByText("Mechanical");
   public readonly harvestOption = this.getByText("Harvest");
+  public readonly operationsShowMoreButton = this.getByText("Show more").nth(1);
   // Monitoring
   private readonly monitoringHeading = this.getHeadingByText("Monitoring");
   private readonly multiSpectralImagingOption = this.getByText(
@@ -51,6 +50,8 @@ export class MapPage extends BasePage {
     "Soil evaluation",
     { exact: true }
   );
+  public readonly monitoringShowMoreButton = this.getByText("Show more").nth(2);
+
   public readonly addFilterButton = this.getByText("Add filter");
   private readonly addFilterDropdown = this.page.getByRole("menu");
   private readonly displayOptionsHeading = this.page.locator(
@@ -61,9 +62,9 @@ export class MapPage extends BasePage {
   );
   // Land images
   private readonly landImagesHeading = this.getByText("Land images");
+  private readonly elevation = this.getByText("Elevation");
   public readonly rgbDroneOption = this.getByText("RGB drone");
   public readonly ndviDroneOption = this.getByText("NDVI drone");
-  private readonly elevation = this.getByText("Elevation");
   public readonly scaleContainer = this.page.locator(".scale-container");
   // Weather conditions
   private readonly weatherConditionsHeading =

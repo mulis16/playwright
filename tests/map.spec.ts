@@ -94,7 +94,7 @@ test.describe("Map - Display options", () => {
   });
 });
 test.describe("Warehouse", () => {
-  test("Create Receive from harvest order", async ({ page }) => {
+  test("Create Receive from harvest order and Cancel it", async ({ page }) => {
     const mapPage = new MapPage(page);
     const warehousePage = new WarehousePage(page);
     const mainSidebarPage = new MainSidebarPage(page);
