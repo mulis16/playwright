@@ -25,7 +25,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run E2E tests
-        run: npx playwright test --browser=chromium
+        run: npx playwright test
 
       - name: Upload test results
         if: always()
@@ -33,4 +33,4 @@ jobs:
         with:
           name: playwright-report-chromium
           path: playwright-report/
-          retention-days: 7
+          retention-days: 14
