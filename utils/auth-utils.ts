@@ -5,7 +5,7 @@ import { AuthenticatePage } from "../pages/authenticate-page";
 export async function loginWithKeycloak(
   page: Page,
   config: typeof keycloakConfig
-): Promise<void> {
+) {
   const authPage = new AuthenticatePage(page);
 
   await authPage.navigateToAuthPage(config);
