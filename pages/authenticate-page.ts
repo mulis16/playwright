@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { keycloakConfig } from "../utils/auth.config";
 
 import { BasePage } from "./base.page";
