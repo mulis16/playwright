@@ -33,4 +33,4 @@ jobs:
         with:
           name: playwright-report-chromium
           path: playwright-report/
-          retention-days: 14
+          retention-days: 7
