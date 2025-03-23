@@ -11,7 +11,11 @@ export class BasePage {
     return this.page.locator(`[test-navigation-item="${name}"]`);
   }
 
-  getHeadingByText(text: string) {
+  protected getHeadingByText(text: string) {
     return this.page.getByRole("heading", { name: text });
+  }
+
+  protected getFilterOption(optionName: string) {
+    return this.page.locator(`[test-filter-checkbox-option="${optionName}"]`);
   }
 }

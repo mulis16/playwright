@@ -6,12 +6,6 @@ export class MapPage extends BasePage {
   drawerOpened = /drawer--open/;
 
   private readonly menuSidebar = this.page.locator(".map-sidebar");
-  // TODO: move this two locators somewhere else
-  public readonly filtersNavigationItemButton =
-    this.getNavigationItem("Filters");
-  public readonly displayOptionsNavigationItemButton =
-    this.getNavigationItem("Display options");
-
   private readonly filtersHeading = this.page.locator(".header-container", {
     hasText: "Filters",
   });
@@ -57,10 +51,8 @@ export class MapPage extends BasePage {
     "Soil evaluation",
     { exact: true }
   );
-
   public readonly addFilterButton = this.getByText("Add filter");
-  public readonly addFilterDropdown = this.page.getByRole("menu");
-
+  private readonly addFilterDropdown = this.page.getByRole("menu");
   private readonly displayOptionsHeading = this.page.locator(
     ".header-container",
     {
@@ -68,7 +60,7 @@ export class MapPage extends BasePage {
     }
   );
   // Land images
-  private readonly landImagesHeading = this.getHeadingByText("Land images");
+  private readonly landImagesHeading = this.getByText("Land images");
   public readonly rgbDroneOption = this.getByText("RGB drone");
   public readonly ndviDroneOption = this.getByText("NDVI drone");
   private readonly elevation = this.getByText("Elevation");
@@ -129,7 +121,7 @@ export class MapPage extends BasePage {
   async assertAddFilterDropdownElements() {
     await expect(this.addFilterDropdown).toBeVisible();
     await expect(this.addFilterDropdown).toContainText("Soil");
-    await expect(this.addFilterDropdown).toContainText("rating");
+    await expect(this.addFilterDropdown).toContainText("rating"); // bug in the app?
     await expect(this.addFilterDropdown).toContainText("Contamination");
     await expect(this.addFilterDropdown).toContainText("Weed");
   }
@@ -138,7 +130,7 @@ export class MapPage extends BasePage {
     await expect(this.menuSidebar).toHaveClass(this.drawerOpened);
     await expect(this.menuSidebar).not.toHaveClass(this.drawerClosed);
     await expect(this.displayOptionsHeading).toBeVisible();
-    // await expect(this.landImagesHeading).toBeVisible();
+    await expect(this.landImagesHeading).toBeVisible();
     await expect(this.rgbDroneOption).toBeVisible();
     await expect(this.ndviDroneOption).toBeVisible();
     await expect(this.elevation).toBeVisible();
