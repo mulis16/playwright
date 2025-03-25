@@ -91,6 +91,7 @@ test.describe("Map - Display options", () => {
     await expect(mapPage.displayOptionsCounter).toHaveText("2");
   });
 });
+
 test.describe("Warehouse", () => {
   test("Create Receive from harvest order and Cancel it", async ({ page }) => {
     const mapPage = new MapPage(page);

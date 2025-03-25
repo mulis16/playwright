@@ -1,6 +1,5 @@
 import { Page } from "@playwright/test";
 import { keycloakConfig } from "../utils/auth.config";
-
 import { BasePage } from "./base.page";
 
 export class AuthenticatePage extends BasePage {
